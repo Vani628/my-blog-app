@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { imgs } from "@/Imgs/imgs";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const page = () => {
   const [image, setImage] = useState(false);
@@ -32,11 +32,7 @@ const page = () => {
     formData.append("authorImg", data.authorImg);
     formData.append("image", image);
 
-    const simulatedSuccess = true;
-
-    if (simulatedSuccess) {
-      toast.success("Blog submitted successfully!");
-      setImage(false);
+    setImage(false);
       setData({
         title: "",
         description: "",
@@ -44,9 +40,22 @@ const page = () => {
         author: "Manish Sarhotra",
         author_img: "/prof.png",
       });
-    } else {
-      toast.error("Error submitting the blog.");
-    }
+
+    // const simulatedSuccess = true;
+
+    // if (simulatedSuccess) {
+    //   toast.success("Blog submitted successfully!");
+    //   setImage(false);
+    //   setData({
+    //     title: "",
+    //     description: "",
+    //     category: "Fashion",
+    //     author: "Manish Sarhotra",
+    //     author_img: "/prof.png",
+    //   });
+    // } else {
+    //   toast.error("Error submitting the blog.");
+    // }
   };
 
   return (
