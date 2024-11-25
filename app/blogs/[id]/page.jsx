@@ -12,19 +12,36 @@ const page = ({params}) => {
 
     const [data,setData]=useState(null);
 
-    const fetchBlogData=()=>{
-        for(let i=0;i<blog_data.length;i++){
-            if(Number(params.id)===blog_data[i].id){
-                setData(blog_data[i]);
-                console.log(blog_data[i]);
-                break;
-            }
-        }
-    }
-
     useEffect(() => {
-            fetchBlogData();
-    }, []);
+        const fetchBlogData = () => {
+          for (let i = 0; i < blog_data.length; i++) {
+            if (Number(params.id) === blog_data[i].id) {
+              setData(blog_data[i]);
+              console.log(blog_data[i]);
+              break;
+            }
+          }
+        };
+        fetchBlogData();
+      }, [params.id]); // Add 'params.id' to dependencies to ensure the hook is safe.
+    
+      if (!data) {
+        return <div>Loading...</div>; // Add a loading state while `data` is null.
+      }
+
+    // const fetchBlogData=()=>{
+    //     for(let i=0;i<blog_data.length;i++){
+    //         if(Number(params.id)===blog_data[i].id){
+    //             setData(blog_data[i]);
+    //             console.log(blog_data[i]);
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // useEffect(() => {
+    //         fetchBlogData();
+    // }, []);
     return (data?<>
             <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
                 <div className='flex justify-between items-center'>
