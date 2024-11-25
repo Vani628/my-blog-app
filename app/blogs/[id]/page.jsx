@@ -6,42 +6,46 @@ import Image from 'next/image';
 import { imgs } from '@/Imgs/imgs';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { useDynamicRouteParams } from 'next/dist/server/app-render/dynamic-rendering';
 
-const page = ({params}) => {
-
-    const [data,setData]=useState(null);
-
-    useEffect(() => {
-        const fetchBlogData = () => {
-          for (let i = 0; i < blog_data.length; i++) {
-            if (Number(params.id) === blog_data[i].id) {
-              setData(blog_data[i]);
-              console.log(blog_data[i]);
-              break;
-            }
-          }
-        };
-        fetchBlogData();
-      }, [params.id]); // Add 'params.id' to dependencies to ensure the hook is safe.
-    
-      if (!data) {
-        return <div>Loading...</div>; // Add a loading state while `data` is null.
+const page = () => {
+    const [data, setData] = useState(null);
+  
+    const fetchBlogData = () => {
+      const staticId = 1; // Example static ID (you can replace with any value or logic)
+      for (let i = 0; i < blog_data.length; i++) {
+        if (staticId === blog_data[i].id) {
+          setData(blog_data[i]);
+          console.log(blog_data[i]);
+          break;
+        }
       }
+    };
+  
+    useEffect(() => {
+      fetchBlogData();
+    }, []); // Runs once on component mount
+  
+    if (!data) {
+      return <div>Loading...</div>; // Show loading state while data is being fetched
+    }
+// const page = ({params}) => {
 
-    // const fetchBlogData=()=>{
-    //     for(let i=0;i<blog_data.length;i++){
-    //         if(Number(params.id)===blog_data[i].id){
-    //             setData(blog_data[i]);
-    //             console.log(blog_data[i]);
-    //             break;
-    //         }
-    //     }
-    // }
+//     const [data,setData]=useState(null);
 
-    // useEffect(() => {
-    //         fetchBlogData();
-    // }, []);
+//     const fetchBlogData=()=>{
+//         for(let i=0;i<blog_data.length;i++){
+//             if(Number(params.id)===blog_data[i].id){
+//                 setData(blog_data[i]);
+//                 console.log(blog_data[i]);
+//                 break;
+//             }
+//         }
+//     }
+
+//     useEffect(() => {
+//             fetchBlogData();
+//     }, []);
+
     return (data?<>
             <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
                 <div className='flex justify-between items-center'>
