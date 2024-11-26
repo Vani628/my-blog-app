@@ -11,7 +11,7 @@ const page = () => {
     const [data, setData] = useState(null);
   
     const fetchBlogData = () => {
-      const staticId = 1; // Example static ID (you can replace with any value or logic)
+      const staticId = 1; 
       for (let i = 0; i < blog_data.length; i++) {
         if (staticId === blog_data[i].id) {
           setData(blog_data[i]);
@@ -23,28 +23,11 @@ const page = () => {
   
     useEffect(() => {
       fetchBlogData();
-    }, []); // Runs once on component mount
+    }, []); 
   
     if (!data) {
-      return <div>Loading...</div>; // Show loading state while data is being fetched
+      return <div>Loading...</div>; 
     }
-// const page = ({params}) => {
-
-//     const [data,setData]=useState(null);
-
-//     const fetchBlogData=()=>{
-//         for(let i=0;i<blog_data.length;i++){
-//             if(Number(params.id)===blog_data[i].id){
-//                 setData(blog_data[i]);
-//                 console.log(blog_data[i]);
-//                 break;
-//             }
-//         }
-//     }
-
-//     useEffect(() => {
-//             fetchBlogData();
-//     }, []);
 
     return (data?<>
             <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
@@ -52,9 +35,11 @@ const page = () => {
                     <Link href='/'> 
                     <Image src={imgs.logo3} width={180} alt='' className='w-[130px] sm:w-auto'/>
                     </Link>
+                    <Link href='/admin'>
                     <button className='flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000000]'>
                         Get Started <Image src={imgs.arrow} width={30} alt=''/>
                     </button>
+                    </Link>
                 </div>
                 <div className='text-center my-24'>
                     <h1 className='text-2xl sm:text-5xl font-semibold max-w-[700px] mx-auto'>{data.title}</h1>

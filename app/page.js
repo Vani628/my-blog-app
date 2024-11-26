@@ -2,6 +2,7 @@
 import BlogList from "@/components/BlogList";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Login from "@/components/Login";
 // import { ToastContainer } from "react-toastify";
 // import 'react-toastify/dist/ReactToastify.css';
 
