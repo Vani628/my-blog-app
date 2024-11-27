@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
 
-const Login = ({ onSignup, onClose }) => {
+'use client'
+import React from 'react';
+import Link from 'next/link';
+import { useState } from 'react';
+
+const page = ({ onSignup, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -48,14 +51,14 @@ const Login = ({ onSignup, onClose }) => {
         <p className="mt-4 text-center">
           Don't have an account?{' '}
           <button className="text-blue-500 underline" onClick={onSignup}>
-            Sign up
+            <Link href="/sign-up" >Sign up </Link>
           </button>
         </p>
         <button
           onClick={onClose}
           className="mt-4 w-full text-center bg-gray-300 text-black py-2 rounded-md hover:bg-gray-400"
         >
-          Back to Home
+          <Link href="/">Back to Home</Link>
         </button>
 
         <Link href="/admin">
@@ -70,4 +73,4 @@ const Login = ({ onSignup, onClose }) => {
   );
 };
 
-export default Login;
+export default page;

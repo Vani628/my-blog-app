@@ -1,7 +1,8 @@
+'use client'
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const Signup = ({ onLogin, onClose }) => {
+const page = ({ onLogin, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -67,7 +68,7 @@ const Signup = ({ onLogin, onClose }) => {
           onClick={onClose}
           className="mt-4 w-full text-center bg-gray-300 text-black py-2 rounded-md hover:bg-gray-400"
         >
-          Back to Home
+          <Link href="/">Back to Home</Link>
         </button>
         <Link href="/admin">
             <button
@@ -81,4 +82,4 @@ const Signup = ({ onLogin, onClose }) => {
   );
 };
 
-export default Signup;
+export default page;

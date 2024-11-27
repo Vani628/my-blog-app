@@ -12,9 +12,7 @@ export default function Layout({ children }) {
             <h3 className="font-medium">Admin Panel</h3>
             <Image src={imgs.profile} width={40} alt="" />
           </div>
-          <div className="flex justify-center mt-40">
-            <Image src={imgs.logo} alt="Logo" width={150} height={50} />
-          </div>
+          
           {children}
         </div>
       </div>
