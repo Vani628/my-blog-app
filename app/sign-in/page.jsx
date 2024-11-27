@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const page = ({ onSignup, onClose }) => {
+const Page = ({ onSignup, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -49,7 +49,7 @@ const page = ({ onSignup, onClose }) => {
           </button>
         </form>
         <p className="mt-4 text-center">
-          Don't have an account?{' '}
+          Do not have an account?{' '}
           <button className="text-blue-500 underline" onClick={onSignup}>
             <Link href="/sign-up" >Sign up </Link>
           </button>
@@ -73,4 +73,4 @@ const page = ({ onSignup, onClose }) => {
   );
 };
 
-export default page;
+export default Page;

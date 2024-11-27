@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 
-const page = ({onClose}) => {
+const Page = ({onClose}) => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -154,4 +154,4 @@ const page = ({onClose}) => {
   );
 };
 
-export default page;
+export default Page;

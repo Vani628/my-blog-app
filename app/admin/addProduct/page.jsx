@@ -1,9 +1,9 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Image from "next/image";
 import { imgs } from "@/Imgs/imgs";
 
-const page = () => {
+const Page = () => {
   const [image, setImage] = useState(false);
 
   const [data, setData] = useState({
@@ -126,4 +126,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

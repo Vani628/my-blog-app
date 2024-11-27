@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { blog_data } from "@/Imgs/imgs";
 import BlogTableItem from "@/components/AdminComponents/BlogTableItem";
 
-const page = () => {
+const Page = () => {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = () => {
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

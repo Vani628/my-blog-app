@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const page = ({ onLogin, onClose }) => {
+const Page = ({ onLogin, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -82,4 +82,4 @@ const page = ({ onLogin, onClose }) => {
   );
 };
 
-export default page;
+export default Page;

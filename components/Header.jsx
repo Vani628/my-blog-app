@@ -45,7 +45,7 @@ const Header = () => {
         <p className="mt-10 max-w-[740px] m-auto text-xs sm:text-base">
           Welcome to our Blog App! Here, you can explore a variety of insightful
           articles, stay updated with the latest trends, and share your thoughts
-          with the community. Whether you're here to read, write, or interact,
+          with the community. Whether you are here to read, write, or interact,
           we aim to create an engaging space where ideas come to life. Enjoy
           your journey through our collection of blogs!
         </p>

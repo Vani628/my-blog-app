@@ -7,7 +7,7 @@ import { imgs } from '@/Imgs/imgs';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 
-const page = () => {
+const Page = () => {
     const [data, setData] = useState(null);
   
     const fetchBlogData = () => {
@@ -71,5 +71,5 @@ const page = () => {
             </>:<></>
     )
 }
-export default page;
+export default Page;
 
