@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 
-const Page = ({onClose}) => {
+const Page = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -142,12 +142,13 @@ const Page = ({onClose}) => {
             {loading ? "Submitting..." : "Submit"}
           </button>
 
-          <button
-          onClick={onClose}
-          className="mt-4 w-full text-center bg-gray-300 text-black py-2 rounded-md hover:bg-gray-400"
-        >
-          <Link href="/">Back to Home</Link>
-        </button>
+          <Link href="/">
+            <button
+              className="mt-4 w-full text-center bg-gray-300 text-black py-2 rounded-md hover:bg-gray-400"
+            >
+              Back to Home
+            </button>
+          </Link>
         </form>
       </div>
     </div>
