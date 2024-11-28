@@ -1,8 +1,6 @@
-
-'use client'
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
 
 const Page = ({ onSignup, onClose }) => {
   const [email, setEmail] = useState('');
@@ -11,7 +9,6 @@ const Page = ({ onSignup, onClose }) => {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log('Login data:', { email, password });
-
     setEmail('');
     setPassword('');
   };
@@ -22,8 +19,9 @@ const Page = ({ onSignup, onClose }) => {
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block mb-2">Email</label>
+            <label htmlFor="email" className="block mb-2">Email</label>
             <input
+              id="email"
               type="email"
               className="w-full px-4 py-2 border rounded-md"
               value={email}
@@ -32,8 +30,9 @@ const Page = ({ onSignup, onClose }) => {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-2">Password</label>
+            <label htmlFor="password" className="block mb-2">Password</label>
             <input
+              id="password"
               type="password"
               className="w-full px-4 py-2 border rounded-md"
               value={password}
@@ -44,6 +43,7 @@ const Page = ({ onSignup, onClose }) => {
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+            disabled={!email || !password} // Disable if fields are empty
           >
             Login
           </button>
@@ -51,7 +51,7 @@ const Page = ({ onSignup, onClose }) => {
         <p className="mt-4 text-center">
           Do not have an account?{' '}
           <button className="text-blue-500 underline" onClick={onSignup}>
-            <Link href="/sign-up" >Sign up </Link>
+            <Link href="/sign-up">Sign up</Link>
           </button>
         </p>
         <button
@@ -62,11 +62,11 @@ const Page = ({ onSignup, onClose }) => {
         </button>
 
         <Link href="/admin">
-            <button
-              className="mt-4 w-full text-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
-            >
-              Go to Admin Panel
-            </button>
+          <button
+            className="mt-4 w-full text-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
+          >
+            Go to Admin Panel
+          </button>
         </Link>
       </div>
     </div>

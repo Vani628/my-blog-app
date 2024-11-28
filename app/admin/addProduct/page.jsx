@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import { imgs } from "@/Imgs/imgs";
@@ -10,7 +10,7 @@ const Page = () => {
     title: "",
     description: "",
     category: "Fashion",
-    author: "Manish Sarhotra",
+    author: "", // No static author name here, it's dynamic now
     author_img: "/prof.png",
   });
 
@@ -27,7 +27,7 @@ const Page = () => {
       title: data.title,
       body: data.description,
       category: data.category,
-      author: data.author,
+      author: data.author,  // Use the dynamic author value from the form
       authorImg: data.author_img,
     };
   
@@ -53,7 +53,7 @@ const Page = () => {
           title: "",
           description: "",
           category: "Fashion",
-          author: "Manish Sarhotra",
+          author: "",  // Reset author field
           author_img: "/prof.png",
         });
       } else {
@@ -73,7 +73,7 @@ const Page = () => {
           src={!image ? imgs.upload : URL.createObjectURL(image)}
           width={140}
           height={70}
-          alt=""
+          alt="Thumbnail"
         />
       </label>
       <input
@@ -101,8 +101,7 @@ const Page = () => {
         onChange={onChangeHandler}
         value={data.description}
         className="w-full sm:w-[500px] mt-4 px-4 py-3 border"
-        type="text"
-        placeholder="Write Content here"
+        placeholder="Write content here"
         rows={6}
         required
       />
@@ -118,7 +117,18 @@ const Page = () => {
         <option value="Lifestyle">Lifestyle</option>
         <option value="Fashion">Fashion</option>
       </select>
-      <br />
+
+      <p className="text-xl mt-4">Author Name</p>
+      <input
+        name="author"
+        onChange={onChangeHandler}
+        value={data.author}
+        className="w-full sm:w-[500px] mt-4 px-4 py-3 border"
+        type="text"
+        placeholder="Enter author name"
+        required
+      />
+      
       <button type="submit" className="mt-8 w-40 h-12 bg-black text-white">
         ADD
       </button>
