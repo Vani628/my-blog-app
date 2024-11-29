@@ -1,16 +1,23 @@
-"use client"
-import React, { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Page = ({ onSignup, onClose }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Login data:', { email, password });
-    setEmail('');
-    setPassword('');
+
+    // Simulating login success
+    console.log("Login data:", { email, password });
+    toast.success("Login successful!"); // Display success toast
+
+    // Clear input fields
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -19,7 +26,9 @@ const Page = ({ onSignup, onClose }) => {
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label htmlFor="email" className="block mb-2">Email</label>
+            <label htmlFor="email" className="block mb-2">
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -30,7 +39,9 @@ const Page = ({ onSignup, onClose }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block mb-2">Password</label>
+            <label htmlFor="password" className="block mb-2">
+              Password
+            </label>
             <input
               id="password"
               type="password"
@@ -49,7 +60,7 @@ const Page = ({ onSignup, onClose }) => {
           </button>
         </form>
         <p className="mt-4 text-center">
-          Do not have an account?{' '}
+          Do not have an account?{" "}
           <button className="text-blue-500 underline" onClick={onSignup}>
             <Link href="/sign-up">Sign up</Link>
           </button>
@@ -62,13 +73,25 @@ const Page = ({ onSignup, onClose }) => {
         </button>
 
         <Link href="/admin">
-          <button
-            className="mt-4 w-full text-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
-          >
+          <button className="mt-4 w-full text-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600">
             Go to Admin Panel
           </button>
         </Link>
       </div>
+
+      {/* ToastContainer to display notifications */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

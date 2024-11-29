@@ -1,19 +1,30 @@
-'use client'
-import React, { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Page = ({ onLogin, onClose }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignup = (e) => {
     e.preventDefault();
-    console.log('Signup data:', { email, password, confirmPassword });
 
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
+    // Simulate successful signup
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match!"); // Error message for mismatched passwords
+      return;
+    }
+
+    console.log("Signup data:", { email, password, confirmPassword });
+    toast.success("Signup successful!"); // Success toast
+
+    // Clear input fields
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
@@ -59,7 +70,7 @@ const Page = ({ onLogin, onClose }) => {
           </button>
         </form>
         <p className="mt-4 text-center">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <button className="text-blue-500 underline" onClick={onLogin}>
             Log in
           </button>
@@ -71,13 +82,25 @@ const Page = ({ onLogin, onClose }) => {
           <Link href="/">Back to Home</Link>
         </button>
         <Link href="/admin">
-            <button
-              className="mt-4 w-full text-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
-            >
-              Go to Admin Panel
-            </button>
+          <button className="mt-4 w-full text-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600">
+            Go to Admin Panel
+          </button>
         </Link>
       </div>
+
+      {/* ToastContainer to display toast notifications */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };
