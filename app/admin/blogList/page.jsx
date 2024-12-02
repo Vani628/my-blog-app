@@ -1,53 +1,70 @@
-"use client";
+"use client"; 
+
 import React, { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { blog_data } from "@/Imgs/imgs";
-import BlogTableItem from "@/components/AdminComponents/BlogTableItem";
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
+import { blog_data } from "@/Imgs/imgs"; 
+import BlogTableItem from "@/components/AdminComponents/BlogTableItem"; 
 
 const Page = () => {
+  // State for storing all blog posts
   const [posts, setPosts] = useState([]);
+
+  // State for managing the currently edited post
   const [editingPost, setEditingPost] = useState(null);
+
+  // State for the updated post's title and author during editing
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedAuthor, setUpdatedAuthor] = useState("");
 
+  // Fetches posts from localStorage and merges with predefined blog data
   const fetchPosts = () => {
     const localPosts = JSON.parse(localStorage.getItem("posts")) || [];
     const mergedPosts = [...blog_data, ...localPosts];
+
+    // Ensures unique posts based on ID
     const uniquePosts = mergedPosts.filter(
       (value, index, self) =>
         index === self.findIndex((t) => t.id === value.id)
     );
-    setPosts(uniquePosts);
+
+    setPosts(uniquePosts); // Update state with fetched posts
   };
 
+  // Deletes a post by its ID
   const deletePost = (postId) => {
+    // Remove the post from the current state
     setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
 
+    // Update localStorage to persist the deletion
     setTimeout(() => {
       const localPosts = JSON.parse(localStorage.getItem("posts")) || [];
       const updatedLocalPosts = localPosts.filter((post) => post.id !== postId);
       localStorage.setItem("posts", JSON.stringify(updatedLocalPosts));
     }, 0);
 
-    toast.success("Post deleted successfully!");
+    toast.success("Post deleted successfully!"); // Notify the user
   };
 
+  // Initiates editing for a specific post
   const handleEditPost = (post) => {
-    setEditingPost(post);
-    setUpdatedTitle(post.title);
-    setUpdatedAuthor(post.author || `User ${post.userId}`);
+    setEditingPost(post); 
+    setUpdatedTitle(post.title); 
+    setUpdatedAuthor(post.author || `User ${post.userId}`); 
   };
 
+  // Saves updates to the edited post
   const saveUpdatedPost = () => {
+    // Update the post in the state
     const updatedPosts = posts.map((post) =>
       post.id === editingPost.id
         ? { ...post, title: updatedTitle, author: updatedAuthor }
         : post
     );
 
-    setPosts(updatedPosts);
+    setPosts(updatedPosts); // Update the state
 
+    // Update localStorage with the changes
     const localPosts = JSON.parse(localStorage.getItem("posts")) || [];
     const updatedLocalPosts = localPosts.map((post) =>
       post.id === editingPost.id
@@ -56,22 +73,26 @@ const Page = () => {
     );
     localStorage.setItem("posts", JSON.stringify(updatedLocalPosts));
 
-    setEditingPost(null);
-    toast.success("Post updated successfully!");
+    setEditingPost(null); // Reset the editing state
+    toast.success("Post updated successfully!"); // Notify the user
   };
 
+  // Cancels editing a post
   const cancelEdit = () => {
-    setEditingPost(null);
+    setEditingPost(null); 
   };
 
+  // Runs on component mount and listens for localStorage changes
   useEffect(() => {
-    fetchPosts();
+    fetchPosts(); 
 
+    // Listener for localStorage changes (if multiple tabs are used)
     const storageChangeListener = () => {
       fetchPosts();
     };
     window.addEventListener("storage", storageChangeListener);
 
+    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("storage", storageChangeListener);
     };
@@ -80,6 +101,8 @@ const Page = () => {
   return (
     <div className="flex-1 pt-5 px-5 sm:pt-12 sm:px-16">
       <h1 className="text-lg sm:text-2xl font-bold">All Blogs</h1>
+      
+      {/* Table displaying all blog posts */}
       <div className="relative h-[80vh] max-w-full overflow-x-auto mt-4 border border-gray-400 scrollbar-hide">
         <table className="w-full text-sm text-gray-500">
           <thead className="text-xs text-gray-700 text-left uppercase bg-gray-50">
@@ -95,6 +118,7 @@ const Page = () => {
             </tr>
           </thead>
           <tbody>
+            {/* If no posts are available */}
             {posts.length === 0 ? (
               <tr>
                 <td colSpan="4" className="text-center py-4">
@@ -102,13 +126,14 @@ const Page = () => {
                 </td>
               </tr>
             ) : (
+              /* Render each post using BlogTableItem component */
               posts.map((post) => (
                 <BlogTableItem
                   key={post.id}
                   title={post.title}
                   author={post.author || `User ${post.userId}`}
-                  onDelete={() => deletePost(post.id)}
-                  onEdit={() => handleEditPost(post)} // Add onEdit handler
+                  onDelete={() => deletePost(post.id)} // Pass delete handler
+                  onEdit={() => handleEditPost(post)} // Pass edit handler
                 />
               ))
             )}
@@ -116,7 +141,7 @@ const Page = () => {
         </table>
       </div>
 
-      {/* Edit Post Form */}
+      {/* Form for editing posts */}
       {editingPost && (
         <div className="mt-8">
           <h2 className="text-xl font-bold">Edit Post</h2>
@@ -154,7 +179,6 @@ const Page = () => {
           </form>
         </div>
       )}
-
       <ToastContainer />
     </div>
   );
